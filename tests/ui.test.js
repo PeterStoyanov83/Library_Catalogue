@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 test.describe('Library Catalogue UI Tests', () => {
 
   test('Verify "All Books" link is visible', async ({ page }) => {
-    await page.goto('http://localhost:3000');
+    await page.goto('http://localhost:3030');
     await page.waitForSelector('nav.navbar');
     const allBooksLink = await page.$('a[href="/catalog"]');
     const isLinkVisible = await allBooksLink.isVisible();
@@ -11,7 +11,7 @@ test.describe('Library Catalogue UI Tests', () => {
   });
 
   test('Verify "Login" button is visible', async ({ page }) => {
-    await page.goto('http://localhost:3000');
+    await page.goto('http://localhost:3030');
     await page.waitForSelector('nav.navbar');
     const loginButton = await page.$('a[href="/login"]');
     const isLoginVisible = await loginButton.isVisible();
@@ -19,7 +19,7 @@ test.describe('Library Catalogue UI Tests', () => {
   });
 
   test('Verify "Register" button is visible', async ({ page }) => {
-    await page.goto('http://localhost:3000');
+    await page.goto('http://localhost:3030');
     await page.waitForSelector('nav.navbar');
     const registerButton = await page.$('a[href="/register"]');
     const isRegisterVisible = await registerButton.isVisible();
@@ -27,7 +27,7 @@ test.describe('Library Catalogue UI Tests', () => {
   });
 
   test('Verify Book Details Page', async ({ page }) => {
-    await page.goto('http://localhost:3000');
+    await page.goto('http://localhost:3030');
     await page.click('text=A Court of Thorns and Roses');
     await expect(page).toHaveText('h1', 'A Court of Thorns and Roses');
     await expect(page).toHaveSelector('button:has-text("Edit")');
@@ -35,7 +35,7 @@ test.describe('Library Catalogue UI Tests', () => {
   });
 
   test('Verify Add Book Functionality', async ({ page }) => {
-    await page.goto('http://localhost:3000');
+    await page.goto('http://localhost:3030');
     await page.click('text=Add Book');
     await page.fill('#title', 'New Book');
     await page.fill('#description', 'A description for the new book');
@@ -46,7 +46,7 @@ test.describe('Library Catalogue UI Tests', () => {
   });
 
   test('Verify Edit Book Functionality', async ({ page }) => {
-    await page.goto('http://localhost:3000');
+    await page.goto('http://localhost:3030');
     await page.click('text=A Court of Thorns and Roses');
     await page.click('text=Edit');
     await page.fill('#title', 'Updated Title');
@@ -55,7 +55,7 @@ test.describe('Library Catalogue UI Tests', () => {
   });
 
   test('Verify Delete Book Functionality', async ({ page }) => {
-    await page.goto('http://localhost:3000');
+    await page.goto('http://localhost:3030');
     await page.click('text=A Court of Thorns and Roses');
     await page.click('text=Delete');
     await page.click('text=Confirm');
@@ -63,7 +63,7 @@ test.describe('Library Catalogue UI Tests', () => {
   });
 
   test('Verify User Login and Logout', async ({ page }) => {
-    await page.goto('http://localhost:3000/login');
+    await page.goto('http://localhost:3030/login');
     await page.fill('#email', 'peter@abv.bg');
     await page.fill('#password', 'password123');
     await page.click('text=Login');
@@ -73,7 +73,7 @@ test.describe('Library Catalogue UI Tests', () => {
   });
 
   test('Verify Registration Functionality', async ({ page }) => {
-    await page.goto('http://localhost:3000/register');
+    await page.goto('http://localhost:3030/register');
     await page.fill('#email', 'newuser@abv.bg');
     await page.fill('#password', 'newpassword123');
     await page.click('text=Register');
