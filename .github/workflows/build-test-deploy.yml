@@ -8,58 +8,59 @@ on:
 
 jobs:
   build_and_test:
-
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout the repository
-      uses: actions/checkout@v4
+      - name: Checkout the repository
+        uses: actions/checkout@v4
 
-    - name: Use Node.js 20.x
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20.x'
-        cache: 'npm'
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
 
-    - name: Install npm dependencies
-      run: npm install
+      - name: Install npm dependencies
+        run: npm install
 
-    - name: Run backend
-      run: npm run start-be &
+      - name: Run backend
+        run: npm run start-be &
 
-    - name: Run frontend
-      run: npm run start-fe &
+      - name: Run frontend
+        run: npm run start-fe &
 
-    - name: Run UI tests
-      run: npm run test:ui
-
+      - name: Run UI tests
+        run: npm run test:ui
 
   deploy-backend:
     runs-on: ubuntu-latest
-
     if: github.ref == 'refs/heads/main'
     needs: build_and_test
     steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+
       - name: Deploy to production
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
-          service-id: ${{ secrets.BACKEND_API_KEY }}
+          service-id: ${{ secrets.BACKEND_SERVICE_ID }}
           api-key: ${{ secrets.RENDER_KEY }}
-      - name: slee for 60 sec
-        run: sleep 60
 
+      - name: Sleep for 60 seconds
+        run: sleep 60
 
   deploy-frontend:
     runs-on: ubuntu-latest
-
     if: github.ref == 'refs/heads/main'
     needs: deploy-backend
     steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+
       - name: Deploy to production
-      - uses: actions/checkout@v4
-      - uses: johnbeynon/render-deploy-action@v1.4.4
+        uses: johnbeynon/render-deploy-action@v1.4.4
         with:
-          service-id: ${{ secrets.FRONTEND_API_KEY }}
+          service-id: ${{ secrets.FRONTEND_SERVICE_ID }}
           api-key: ${{ secrets.RENDER_KEY }}
-      - name: slee for 60 sec
+
+      - name: Sleep for 60 seconds
         run: sleep 60
