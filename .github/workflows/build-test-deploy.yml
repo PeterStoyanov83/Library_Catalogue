@@ -9,6 +9,7 @@ on:
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v4
@@ -21,6 +22,9 @@ jobs:
 
       - name: Install npm dependencies
         run: npm install
+
+      - name: Install Playwright browsers
+        run: npx playwright install
 
       - name: Run backend
         run: npm run start-be &
