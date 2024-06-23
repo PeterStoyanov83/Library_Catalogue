@@ -5,7 +5,10 @@
     "main": "index.html",
     "scripts": {
         "test": "mocha tests",
-        "start": "http-server -a localhost -p 3000 -P http://localhost:3000? -c-1"
+        "start": "http-server -a localhost -p 3000 -P http://localhost:3000? -c-1",
+        "start-be": "node server.js",
+        "start-fe": "http-server -a localhost -p 3000 -P http://localhost:3000? -c-1",
+        "test:ui": "playwright test tests/ui.test.js"
     },
     "author": "",
     "license": "ISC",
@@ -21,3 +24,4 @@
         "playwright-chromium": "1.9.2"
     }
 }
+
