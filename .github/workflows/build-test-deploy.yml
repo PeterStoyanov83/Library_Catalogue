@@ -33,12 +33,15 @@ jobs:
       env:
         CI: true
 
+    - name: Install Playwright Browsers
+      run: npx Playwright install
+
     - name: Run frontend
       run: npm run start-fe &
-      env:
-        CI: true
+#      env:
+#        CI: true
 
     - name: Run UI tests
       run: npm run test:ui
-      env:
-        CI: true
+#      env:
+#        CI: true
