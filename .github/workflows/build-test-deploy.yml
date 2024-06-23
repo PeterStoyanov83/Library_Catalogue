@@ -34,7 +34,7 @@ jobs:
         CI: true
 
     - name: Install Playwright Browsers
-      run: npx Playwright install
+      run: npx playwright install
 
     - name: Run frontend
       run: npm run start-fe &
